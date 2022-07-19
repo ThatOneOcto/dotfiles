@@ -1,0 +1,31 @@
+#flameshot gui
+Print
+    flameshot gui -d 500
+
+#bind rofi drun
+super + p
+    rofi -show drun -disable-history -show-icons
+
+#show rofi command run
+super + r
+    rofi -show run -disable-history -show-icons
+
+#rofi emoji plugin
+super + e
+    rofi -show emoji -modi emoji
+
+super + Escape
+    killall sxhkd && setsid sxhkd
+
+# multimedia keys
+
+XF86AudioRaiseVolume
+    pamixer -i 5
+XF86AudioLowerVolume
+    pamixer -d 5
+XF86AudioMute
+    pamixer -t
+XF86Explorer
+    xbacklight +5
+XF86HomePage
+    xbacklight -5
