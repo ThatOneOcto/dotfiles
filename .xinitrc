@@ -16,8 +16,10 @@ xbacklight +100
 dunst &
 udiskie &
 sxhkd &
-# gentoo-pipewire-launcher &
 xfce4-clipman &
+wireplumber &
+pipewire & 
+pipewire-pulse &
 feh --bg-tile ~/.local/share/wallpaper/y-so-serious.png
 
 # loops so yeah
