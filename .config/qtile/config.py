@@ -94,7 +94,7 @@ keys = [
     # keychord
     KeyChord([mod], "m", [
                  Key([], "w", lazy.spawn("firefox")),
-                 Key([], "d", lazy.spawn("discordcanary")),
+                 Key([], "d", lazy.spawn("discord-canary")),
                  Key([], "e", lazy.spawn(f"{terminal} -e nvim")), 
                  Key([], "v", lazy.spawn("pavucontrol")),
                  Key([], "f", lazy.spawn("thunar")),
