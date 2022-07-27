@@ -58,7 +58,18 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
-  use "andweeb/presence.nvim"
+  use {
+    "andweeb/presence.nvim",
+    config = function()
+			require("presence"):setup({
+				main_image = "file",
+				workspace_text = "Working on %s",
+				buttons = true,
+				neovim_image_text = "vi > vscode (vscode users trying to use less than 2 gigs of ram)"
+			})
+
+    end
+  }
   use "norcalli/nvim-colorizer.lua"
   use "tpope/vim-dadbod" -- database viewer
 

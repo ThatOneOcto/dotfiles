@@ -33,6 +33,7 @@ local options = {
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   guifont = "monospace:h11",
+  paste = true
 }
 
 vim.opt.shortmess:append "c"
@@ -50,14 +51,6 @@ vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 vim.cmd [[set noemoji]]
-
--- presence.nvim config
-require("presence"):setup({
-  main_image = "file",
-  workspace_text = "Working on %s",
-  buttons = true,
-  neovim_image_text = "vi > vscode (vscode users trying to use less than 2 gigs of ram)"
-})
 
 -- colorizer config
 require("colorizer").setup({ "*" }, {
