@@ -17,6 +17,7 @@ super + e
 super + Escape
     killall sxhkd && setsid sxhkd
 
+
 # multimedia keys
 
 XF86AudioPlay
