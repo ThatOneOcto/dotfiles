@@ -1,37 +1,16 @@
 
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-
 # Lines configured by zsh-newuser-install
  HISTFILE=~/.histfile
  HISTSIZE=1000
  SAVEHIST=1000
 
- alias ssh="kitty +kitten ssh "
- alias sudo="sudo -E "
  alias mkdir="mkdir -p "
- alias forgor="sudo !!"
- alias myip="curl ifconfig.me"
  alias c="clear"
- alias mkdir="mkdir -p"
  alias ls="lsd -l"
  alias ll="lsd -la"
  alias grep="grep --color=auto"
- alias halt="loginctl poweroff"
- alias shutdown="systemctl poweroff"
- alias reboot="systemctl reboot"
  alias pswdfix="faillock --user $USER --reset"
- alias nf="neofetch"
- alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
-
-PROMPT="%B%F{69}%n%f%b %F{102}%~%f
-%F{8}$ %f"
+ alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%~%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 
 
 # ~/.zshrc
@@ -47,16 +26,7 @@ bindkey "\e[3~" delete-char
 #variables
 export EDITOR=nvim
 export VISUAL=nvim
+export QT_QPA_PLATFORMTHEME=qt5ct
 
-# If you're having issues with command not found, remove the export PATH variable, if you want local bin added run 
-# echo $PATH >> .zshrc
-# Then at the end add :$HOME/.local/bin/
-export PATH=${PATH}:~/.local/bin
-source $HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/powerlevel10k/powerlevel10k.zsh-theme
-alias luamake=/home/octo/git/lua-language-server/3rd/luamake/luamake
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# function aliases
+export PS1="%{$(tput setaf 99)%}%n%{$(tput setaf 99)%}@%{$(tput setaf 99)%}%m %{$(tput setaf 15)%}%~ %{$(tput sgr0)%}$ "
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"

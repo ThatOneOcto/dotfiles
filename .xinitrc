@@ -1,7 +1,4 @@
 #!/bin/bash/
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-
 
 killall xfce4-clipman
 killall udiskie
@@ -15,18 +12,17 @@ export GPG_AGENT_INFO
 xbacklight +100
 dunst &
 udiskie &
+syncthing &
 sxhkd &
+picom &
+easyeffects --gapplication-service &
 xfce4-clipman &
-wireplumber &
 pipewire & 
-pipewire-pulse &
-feh --bg-tile ~/.local/share/wallpaper/y-so-serious.png
+wireplumber &
 
-# loops so yeah
+xrandr --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2 --off --output HDMI-1 --off --output DP-3 --primary --mode 1920x1080 --pos 0x0 --rotate normal --rate 165 --output HDMI-2 --off --output DP-4 --off --output HDMI-3 --off
 
-#while true; do
-       #dbus-launch --sh-syntax --exit-with-session dwm >/dev/null 2>&1
-#done
+exec awesome
 
-#exec $HOME/.cache/xmonad/xmonad-x86_64-linux
-qtile start
+armcord &
+signal-desktop &

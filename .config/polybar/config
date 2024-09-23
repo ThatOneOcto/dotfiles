@@ -1,13 +1,13 @@
 [colors]
-background = #222
-background-alt = #333 
+background = #0f0f0f
+background-alt = #222 
 foreground = #eee
 foreground-alt = #bbb
 
 [settings]
 format-foreground =
 format-underline = #4c7bab
-format-background = #333
+format-background = #222
 format-padding = 1
 format-overline =
 format-margin = 1
@@ -49,8 +49,8 @@ font-0 = sans-serif:scale=10;
 font-1 = Noto Color Emoji:scale=10;
 
 modules-left = bspwm xwindow
-modules-center = 
-modules-right = memory cpu-temperature volume battery wifi time
+modules-center = time 
+modules-right =
 
 tray-position = right
 tray-padding = 0
@@ -83,7 +83,7 @@ type = internal/bspwm
 
 enable-scroll = true
 label-focused = %name%
-label-focused-background = #333
+label-focused-background = #222
 label-focused-underline = #4c7bab
 label-focused-padding = 1
 

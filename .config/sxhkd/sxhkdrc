@@ -1,6 +1,6 @@
 #flameshot gui
-Print
-    flameshot gui -d 500
+ctrl + Print
+    flameshot gui
 
 #bind rofi drun
 super + p
@@ -12,20 +12,16 @@ super + r
 
 #rofi emoji plugin
 super + e
-    rofi -show emoji -modi emoji
+    rofi -show emoji -modi emoji -emoji-mode copy
 
 super + Escape
     killall sxhkd && setsid sxhkd
 
 # multimedia keys
 
-XF86AudioRaiseVolume
-    pamixer -i 5
-XF86AudioLowerVolume
-    pamixer -d 5
-XF86AudioMute
-    pamixer -t
-XF86Explorer
-    xbacklight +5
-XF86HomePage
-    xbacklight -5
+XF86AudioPlay
+    playerctl play-pause
+XF86AudioNext
+    playerctl next
+XF86AudioPrev
+    playerctl previous

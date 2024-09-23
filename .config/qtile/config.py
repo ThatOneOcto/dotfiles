@@ -91,15 +91,6 @@ keys = [
     Key([mod, shift], "c", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, shift], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, shift], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # keychord
-    KeyChord([mod], "m", [
-                 Key([], "w", lazy.spawn("firefox")),
-                 Key([], "d", lazy.spawn("discord-canary")),
-                 Key([], "e", lazy.spawn(f"{terminal} -e nvim")), 
-                 Key([], "v", lazy.spawn("pavucontrol")),
-                 Key([], "f", lazy.spawn("nautilus")),
-                 Key([], "s", lazy.spawn("screenkey"))
-             ])
 ]
 
 groups = [Group(i) for i in "123456789"]
