@@ -20,7 +20,7 @@ xfce4-clipman &
 pipewire &
 wireplumber &
 
-xrandr --output DP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2 --off --output HDMI-1 --off --output DP-3 --primary --mode 1920x1080 --pos 0x0 --rotate normal --rate 165 --output HDMI-2 --off --output DP-4 --off --output HDMI-3 --off
+xrandr --output DP-3 --primary --mode 1920x1080 --rate 165 --pos 0x0 --output DP-1 --mode 1920x1080 --pos 1920x0
 
 exec awesome
 
