@@ -1,6 +1,9 @@
 #flameshot gui
 ctrl + Print
-    flameshot gui
+    flameshot gui --clipboard --path ~/Pictures/Screenshots
+
+Print
+    flameshot screen --clipboard --path ~/Pictures/Screenshots
 
 #bind rofi drun
 super + p

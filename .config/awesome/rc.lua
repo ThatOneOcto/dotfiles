@@ -50,8 +50,9 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 --autostart
 autorun = true
 autorunApps = {
-    "armcord",
-    "signal-desktop"
+    "discord",
+    "signal-desktop",
+    "copyq"
 }
 
 if autorun then
@@ -215,7 +216,6 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,

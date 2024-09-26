@@ -23,6 +23,13 @@ bindkey '^[[5~' beginning-of-line
 bindkey '^[[6~' end-of-line
 bindkey "\e[3~" delete-char
 
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
 #variables
 export EDITOR=nvim
 export VISUAL=nvim
@@ -30,3 +37,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 export PS1="%{$(tput setaf 99)%}%n%{$(tput setaf 99)%}@%{$(tput setaf 99)%}%m %{$(tput setaf 15)%}%~ %{$(tput sgr0)%}$ "
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+fastfetch
+export PATH=$PATH:/home/octo/.spicetify
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
