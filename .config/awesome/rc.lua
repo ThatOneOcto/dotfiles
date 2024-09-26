@@ -18,6 +18,13 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+client.connect_signal("request::manage", function(client, context)
+
+    if client.floating and context == "new" then
+        client.placement = awful.placement.centered
+    end
+end)
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -50,7 +57,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 --autostart
 autorun = true
 autorunApps = {
-    "discord",
+    "vesktop",
     "signal-desktop",
     "copyq"
 }
@@ -281,6 +288,10 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "Return", function ()
+      local term = awful.spawn(terminal, { floating = true, geometry = { width = 900, height = 630 } })
+    end,
+    {description = "open a terminal (floating)", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
