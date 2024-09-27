@@ -14,6 +14,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local vicious = require("vicious")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -68,6 +69,90 @@ if autorun then
    end
 end
 
+-- margin widget for spacing
+local text_margin = wibox.widget { widget = wibox.widget.textbox, text = " " }
+
+-- Create a text widget for memory usage
+local mem_widget = wibox.widget {
+    widget = wibox.widget.textbox,
+    text = "[Loading...]"  -- Initial text while loading
+}
+
+-- Function to update the memory widget
+local function sync_mem_widget()
+    awful.spawn.easy_async("free -h", function(stdout, stderr, reason, exit_code)
+        if exit_code ~= 0 then
+            print("Error executing command: " .. reason .. " | stderr: " .. stderr)
+            mem_widget.text = "[Error]"
+        else
+            -- Split the output into lines
+            local lines = {}
+            for line in stdout:gmatch("[^\r\n]+") do
+                table.insert(lines, line)
+            end
+            
+            -- Get the second line (which contains memory info)
+            local mem_info = lines[2]  -- This is the line for physical memory
+            
+            -- Extract the used memory (3rd column)
+            local mem_used = mem_info:match("%S+%s+%S+%s+(%S+)")
+            if mem_used and mem_used ~= "" then
+                mem_widget.text = "[" .. mem_used .. "]"
+            else
+                mem_widget.text = "[N/A]"
+            end
+        end
+    end)
+end
+
+-- Update the widget immediately
+sync_mem_widget()
+
+-- Create a timer to update the widget every 5 seconds
+gears.timer {
+    timeout = 5,
+    autostart = true,
+    callback = sync_mem_widget,
+}
+
+local temp_widget = wibox.widget {
+    widget = wibox.widget.textbox,
+    text = "[Temp: Loading...]"
+}
+
+local function sync_temp_widget()
+    -- Use a temporary file to store the output
+    awful.spawn.easy_async("sensors", function(stdout)
+        -- Find the Tctl line and extract the temperature
+        for line in stdout:gmatch("[^\r\n]+") do
+            if line:match("Tctl") then
+                local cpu_temp = line:match("(%+%d+%.%d+)°C")  -- Extract the temperature value
+                if cpu_temp then
+                    temp_widget.text = "[" .. cpu_temp .. " C]"
+                else
+                    temp_widget.text = "[N/A]"
+                end
+                break  -- Exit the loop after finding the Tctl line
+            end
+        end
+    end)
+end
+
+-- Update the widget immediately
+sync_temp_widget()
+
+-- Create a timer to update the widget every 5 seconds
+gears.timer {
+    timeout = 5,
+    autostart = true,
+    callback = sync_temp_widget,
+}
+
+cpu_widget = wibox.widget.textbox()
+vicious.register(cpu_widget, vicious.widgets.cpu, "[CPU: $1%]", 1)
+
+
+
 -- floating windows titlebars
 client.connect_signal("property::floating", function(c)
     if c.floating then
@@ -117,8 +202,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
---mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                    menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -129,8 +214,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
+mytextclock = wibox.widget.textclock("%a %b %d %H:%M:%S", 1)
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -216,16 +300,26 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
+            text_margin,
             s.mytaglist,
+            s.mylayoutbox,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            text_margin,
             wibox.widget.systray(),
+            text_margin,
+            cpu_widget,
+            text_margin,
+            temp_widget,
+            text_margin,
+            mem_widget,
+            text_margin,
             mytextclock,
-            s.mylayoutbox,
+            text_margin,
         },
     }
 end)
@@ -562,11 +656,11 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
+            -- awful.titlebar.widget.floatingbutton (c),
+            -- awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
             awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
+            -- awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
