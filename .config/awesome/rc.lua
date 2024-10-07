@@ -19,6 +19,10 @@ local vicious = require("vicious")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+--fullscren fix
+
+
+
 client.connect_signal("request::manage", function(client, context)
 
     if client.floating and context == "new" then
@@ -212,7 +216,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
+-- {{{ /wiWibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%a %b %d %H:%M:%S", 1)
 -- Create a wibox for each screen and add it
@@ -294,6 +298,16 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
+     client.connect_signal("property::fullscreen", function(c)
+        if c.fullscreen then
+        -- Remove the titlebar
+          awful.titlebar.hide(c)
+          c:geometry(c.screen.geometry)
+        else
+        -- Show the titlebar again
+          awful.titlebar.show(c)
+        end
+      end)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -332,6 +346,8 @@ root.buttons(gears.table.join(
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
+
+
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -440,7 +456,7 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
-    awful.key({ modkey,           }, "f",
+    awful.key({ modkey,           }, "g",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()

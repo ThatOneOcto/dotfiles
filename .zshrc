@@ -35,6 +35,8 @@ export EDITOR=nvim
 export VISUAL=nvim
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+
+
 # export PS1="%{$(tput setaf 99)%}%n%{$(tput setaf 99)%}@%{$(tput setaf 99)%}%m %{$(tput setaf 15)%}%~ %{$(tput sgr0)%}$ "
 export PS1=$'%{\e[255m%}%M%{\e[38;5;99m%}@%{\e[38;5;63m%}%n [%{\e[38;5;99m%}%~%{\e[38;5;63m%}] %{\e[36m%}%{\e[2m%}%{\e[0m%}(%?) > %{\e[255m%}'
 
