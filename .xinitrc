@@ -17,12 +17,6 @@ syncthing &
 sxhkd &
 picom &
 easyeffects --gapplication-service &
-pipewire &
-wireplumber &
 
-# xrandr --output DP-5 --primary --mode 1920x1080 --rate 165 --pos 0x0 --output HDMI-4 --mode 1920x1080 --pos 1920x0
-
-nvidia-settings --assign "CurrentMetaMode=$(nvidia-settings --query CurrentMetaMode | awk -F'::' '{print $2}' | sed 's/}/, ForceFullCompositionPipeline=On&/g')"
-
-
+xrandr --output DP-3 --primary --mode 1920x1080 --rate 165 --pos 0x0 --output DP-1 --mode 1920x1080 --pos 1920x0
 exec awesome

@@ -64,7 +64,10 @@ autorun = true
 autorunApps = {
     "vesktop",
     "signal-desktop",
-    "copyq"
+    "copyq",
+    "gajim",
+    "thunderbird",
+    "keepassxc"
 }
 
 if autorun then
@@ -601,7 +604,7 @@ awful.rules.rules = {
           "Wpa_gui",
           "veromix",
           "xtightvncviewer",
-  	  "Thunar",
+  	  "Nemo",
 	  "Kleopatra",
   	  },
 
