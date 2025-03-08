@@ -605,6 +605,7 @@ awful.rules.rules = {
           "veromix",
           "xtightvncviewer",
   	  "Nemo",
+      "Ark",
 	  "Kleopatra",
   	  },
 

@@ -12,6 +12,12 @@
  alias pswdfix="faillock --user $USER --reset"
  alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%~%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias spt="spotify_player"
+alias vspk="pactl load-module module-null-sink sink_name=Virtual-Speaker"
+
+bindkey -e
+bindkey "^[[3~" delete-char
+bindkey "^H" backward-kill-word
+bindkey "^[[3;5~" kill-word
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -39,3 +45,4 @@ export PATH=$PATH:/home/octo/.spicetify
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
+export PATH="$HOME/.local/bin:$PATH"
