@@ -17,6 +17,7 @@ return {
     event = "VeryLazy",
     opts = require "configs.neocord",
   },
+  { "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" } },
 
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
